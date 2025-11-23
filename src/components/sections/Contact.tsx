@@ -10,7 +10,7 @@ import { motion } from 'framer-motion'
 import { Section } from '../ui/Section'
 import { Input } from '../ui/Input'
 import { Textarea } from '../ui/Textarea'
-import { Select } from '../ui/Select'
+import { SelectCustom } from '../ui/SelectCustom'
 import { Checkbox } from '../ui/Checkbox'
 import { Button } from '../ui/Button'
 import { Toast } from '../ui/Toast'
@@ -258,7 +258,7 @@ export function Contact({ services = defaultServiceOptions }: ContactProps) {
 
             {/* Service interest */}
             <motion.div variants={staggerItem}>
-              <Select
+              <SelectCustom
                 label="Service recherché"
                 name="serviceInterest"
                 value={form.values.serviceInterest}
