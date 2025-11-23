@@ -6,9 +6,16 @@
   NODE_VERSION = "20"
   TZ = "Europe/Paris"
 
-# Redirect Netlify subdomain to custom domain
+# Redirect Netlify subdomain to custom domain (HTTPS)
 [[redirects]]
   from = "https://julienbutty.netlify.app/*"
+  to = "https://www.julienbutty.fr/:splat"
+  status = 301
+  force = true
+
+# Redirect Netlify subdomain to custom domain (HTTP)
+[[redirects]]
+  from = "http://julienbutty.netlify.app/*"
   to = "https://www.julienbutty.fr/:splat"
   status = 301
   force = true

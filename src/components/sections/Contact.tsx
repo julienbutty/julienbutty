@@ -96,7 +96,7 @@ export function Contact({ services = defaultServiceOptions }: ContactProps) {
         lastSubmitTime.current = now
 
         // Submit to Netlify Forms
-        const formData = new FormData()
+        const formData = new URLSearchParams()
         formData.append('form-name', 'contact')
         formData.append('bot-field', honeypot) // Honeypot for Netlify
         formData.append('name', sanitizedValues.name)
@@ -109,7 +109,7 @@ export function Contact({ services = defaultServiceOptions }: ContactProps) {
         const response = await fetch('/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(formData as any).toString(),
+          body: formData.toString(),
         })
 
         if (response.ok) {
@@ -200,7 +200,6 @@ export function Contact({ services = defaultServiceOptions }: ContactProps) {
             variants={staggerContainer}
             onSubmit={form.handleSubmit}
             className="space-y-6"
-            data-netlify="true"
             name="contact"
           >
             {/* Netlify form detection field */}
