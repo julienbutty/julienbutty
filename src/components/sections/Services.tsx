@@ -146,26 +146,56 @@ export function Services({ services = defaultServices, showCTA = true }: Service
 
         {/* Services grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {services.map((service) => (
-            <motion.div key={service.id} variants={staggerItem}>
-              <Card hoverable className="h-full flex flex-col">
-                <CardHeader>
-                  <div className="mb-4">
-                    <ServiceIcon icon={service.icon} />
+          {services.map((service) => {
+            // Special styling for AI card
+            const isAiCard = service.id === '2'
+
+            return (
+              <motion.div key={service.id} variants={staggerItem}>
+                {isAiCard ? (
+                  // AI Card with gradient border
+                  <div className="h-full relative p-[0.5px] rounded-xl bg-gradient-to-br from-violet-500 via-fuchsia-400 to-pink-400">
+                    <Card hoverable className="h-full flex flex-col bg-gray-800">
+                      <CardHeader>
+                        <div className="mb-4">
+                          <ServiceIcon icon={service.icon} />
+                        </div>
+                        <h3 className="text-2xl font-bold mb-2">{service.name}</h3>
+                      </CardHeader>
+                      <CardContent className="flex-grow">
+                        <p className="text-gray-400">{service.shortDescription}</p>
+                      </CardContent>
+                      {service.pricingGuidance && (
+                        <div className="px-6 pb-6">
+                          <p className="text-primary-400 font-semibold">
+                            {service.pricingGuidance}
+                          </p>
+                        </div>
+                      )}
+                    </Card>
                   </div>
-                  <h3 className="text-2xl font-bold mb-2">{service.name}</h3>
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  <p className="text-gray-400">{service.shortDescription}</p>
-                </CardContent>
-                {service.pricingGuidance && (
-                  <div className="px-6 pb-6">
-                    <p className="text-primary-400 font-semibold">{service.pricingGuidance}</p>
-                  </div>
+                ) : (
+                  // Regular cards
+                  <Card hoverable className="h-full flex flex-col">
+                    <CardHeader>
+                      <div className="mb-4">
+                        <ServiceIcon icon={service.icon} />
+                      </div>
+                      <h3 className="text-2xl font-bold mb-2">{service.name}</h3>
+                    </CardHeader>
+                    <CardContent className="flex-grow">
+                      <p className="text-gray-400">{service.shortDescription}</p>
+                    </CardContent>
+                    {service.pricingGuidance && (
+                      <div className="px-6 pb-6">
+                        <p className="text-primary-400 font-semibold">{service.pricingGuidance}</p>
+                      </div>
+                    )}
+                  </Card>
                 )}
-              </Card>
-            </motion.div>
-          ))}
+              </motion.div>
+            )
+          })}
         </div>
 
         {/* CTA */}
