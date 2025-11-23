@@ -36,7 +36,7 @@ export function Card({
     'bg-gray-800 border border-gray-700 rounded-xl overflow-hidden'
 
   const hoverClasses = hoverable
-    ? 'cursor-pointer transition-shadow hover:shadow-xl hover:shadow-primary-500/10'
+    ? 'transition-shadow hover:shadow-xl hover:shadow-primary-500/10'
     : ''
 
   const MotionComponent = motion[Component as keyof typeof motion] as any
