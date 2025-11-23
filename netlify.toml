@@ -6,6 +6,13 @@
   NODE_VERSION = "20"
   TZ = "Europe/Paris"
 
+# Redirect Netlify subdomain to custom domain
+[[redirects]]
+  from = "https://julienbutty.netlify.app/*"
+  to = "https://www.julienbutty.fr/:splat"
+  status = 301
+  force = true
+
 # SPA routing - redirect all requests to index.html
 [[redirects]]
   from = "/*"
