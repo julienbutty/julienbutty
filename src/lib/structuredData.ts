@@ -14,8 +14,8 @@ export const localBusinessSchema = {
   '@id': `${siteUrl}/#organization`,
   name: 'Julien Butty - Développeur Freelance',
   url: siteUrl,
-  logo: `${siteUrl}/logo.png`, // Add your logo
-  image: `${siteUrl}/og-image.jpg`,
+  logo: `${siteUrl}/og-image.png`,
+  image: `${siteUrl}/og-image.png`,
   description:
     'Développeur web freelance spécialisé en React, Node.js et TypeScript. Création de sites web et applications sur-mesure à Lyon et partout en France.',
   priceRange: 'Sur devis',
@@ -118,9 +118,9 @@ export const personSchema = {
   familyName: 'Butty',
   jobTitle: 'Développeur Web Freelance',
   description:
-    'Développeur fullstack avec plus de 6 ans d\'expérience. Spécialisé en React, Node.js et TypeScript. Reconverti dans le développement web par passion.',
+    "Développeur fullstack avec plus de 6 ans d'expérience. Spécialisé en React, Node.js et TypeScript. Reconverti dans le développement web par passion.",
   url: siteUrl,
-  image: `${siteUrl}/profile.jpg`, // Add your photo
+  image: `${siteUrl}/og-image.png`,
   email: 'julienbutty@gmail.com',
   address: {
     '@type': 'PostalAddress',
@@ -128,9 +128,7 @@ export const personSchema = {
     addressRegion: 'Auvergne-Rhône-Alpes',
     addressCountry: 'FR',
   },
-  sameAs: [
-    'https://www.linkedin.com/in/julien-butty-471869a4/',
-  ],
+  sameAs: ['https://www.linkedin.com/in/julien-butty-471869a4/'],
   knowsAbout: [
     'React',
     'Node.js',
@@ -158,8 +156,7 @@ export const websiteSchema = {
   '@id': `${siteUrl}/#website`,
   url: siteUrl,
   name: 'Julien Butty - Développeur Freelance Lyon',
-  description:
-    'Portfolio et services de développement web freelance à Lyon',
+  description: 'Portfolio et services de développement web freelance à Lyon',
   publisher: {
     '@id': `${siteUrl}/#organization`,
   },
