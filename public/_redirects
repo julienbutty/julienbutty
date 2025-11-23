@@ -1,0 +1,6 @@
+# Force HTTPS
+http://julienbutty.fr/* https://julienbutty.fr/:splat 301!
+http://www.julienbutty.fr/* https://julienbutty.fr/:splat 301!
+
+# SPA fallback
+/*    /index.html   200

@@ -1,0 +1,240 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Contact Form API",
+    "description": "API contract for contact form submissions on the freelance portfolio website. Uses Netlify Forms for submission handling.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Julien Butty",
+      "email": "julienbutty@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://julienbutty.fr",
+      "description": "Production site (Netlify Forms)"
+    }
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "summary": "Submit contact form",
+        "description": "Submit a contact inquiry via Netlify Forms. Form data is sent as application/x-www-form-urlencoded to the site root with form-name header.",
+        "operationId": "submitContactForm",
+        "tags": ["Contact"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactFormSubmission"
+              },
+              "examples": {
+                "standardInquiry": {
+                  "summary": "Standard contact inquiry",
+                  "value": {
+                    "form-name": "contact",
+                    "name": "Marie Dubois",
+                    "email": "marie.dubois@example.fr",
+                    "phone": "+33 6 12 34 56 78",
+                    "serviceInterest": "Site WordPress sur mesure",
+                    "message": "Bonjour, je souhaite créer un site vitrine pour mon restaurant à Lyon. Pourriez-vous me contacter pour discuter du projet ?",
+                    "rgpd-consent": "on"
+                  }
+                },
+                "minimalInquiry": {
+                  "summary": "Minimal inquiry (required fields only)",
+                  "value": {
+                    "form-name": "contact",
+                    "name": "Pierre Martin",
+                    "email": "pierre.martin@example.fr",
+                    "message": "J'ai besoin d'un site web pour ma PME.",
+                    "rgpd-consent": "on"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Form submission successful (Netlify redirects to thank-you page or shows success message)",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "<html><!-- Thank you page or success message --></html>"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "missingRequired": {
+                    "summary": "Missing required field",
+                    "value": {
+                      "error": "Validation Error",
+                      "message": "Required field 'email' is missing",
+                      "field": "email"
+                    }
+                  },
+                  "invalidEmail": {
+                    "summary": "Invalid email format",
+                    "value": {
+                      "error": "Validation Error",
+                      "message": "Invalid email format",
+                      "field": "email"
+                    }
+                  },
+                  "missingConsent": {
+                    "summary": "RGPD consent not provided",
+                    "value": {
+                      "error": "Validation Error",
+                      "message": "RGPD consent is required",
+                      "field": "rgpd-consent"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests - rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "Rate Limit Exceeded",
+                  "message": "Too many form submissions. Please try again later.",
+                  "retryAfter": 300
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error - form submission failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "Server Error",
+                  "message": "Failed to process form submission. Please try again or contact us directly via email."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ContactFormSubmission": {
+        "type": "object",
+        "required": ["form-name", "name", "email", "message", "rgpd-consent"],
+        "properties": {
+          "form-name": {
+            "type": "string",
+            "description": "Hidden field identifying the form (required by Netlify)",
+            "enum": ["contact"],
+            "example": "contact"
+          },
+          "bot-field": {
+            "type": "string",
+            "description": "Honeypot field for spam detection (should be empty)",
+            "maxLength": 0,
+            "example": ""
+          },
+          "name": {
+            "type": "string",
+            "description": "Visitor's full name",
+            "minLength": 2,
+            "maxLength": 100,
+            "example": "Marie Dubois"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Visitor's email address",
+            "maxLength": 255,
+            "example": "marie.dubois@example.fr"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Visitor's phone number (optional)",
+            "pattern": "^\\+?[0-9\\s\\-\\.\\(\\)]{8,20}$",
+            "example": "+33 6 12 34 56 78"
+          },
+          "serviceInterest": {
+            "type": "string",
+            "description": "Which service the visitor is inquiring about (optional)",
+            "maxLength": 100,
+            "enum": [
+              "Site WordPress sur mesure",
+              "Développement web sur mesure",
+              "Refonte de site existant",
+              "Site e-commerce",
+              "Autre"
+            ],
+            "example": "Site WordPress sur mesure"
+          },
+          "message": {
+            "type": "string",
+            "description": "Visitor's inquiry message",
+            "minLength": 10,
+            "maxLength": 2000,
+            "example": "Bonjour, je souhaite créer un site vitrine pour mon restaurant à Lyon. Pourriez-vous me contacter pour discuter du projet ?"
+          },
+          "rgpd-consent": {
+            "type": "string",
+            "description": "RGPD consent checkbox (required, value 'on' when checked)",
+            "enum": ["on"],
+            "example": "on"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "required": ["error", "message"],
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error type",
+            "example": "Validation Error"
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable error message",
+            "example": "Required field 'email' is missing"
+          },
+          "field": {
+            "type": "string",
+            "description": "Field that caused the error (if applicable)",
+            "example": "email"
+          },
+          "retryAfter": {
+            "type": "integer",
+            "description": "Seconds to wait before retrying (for rate limit errors)",
+            "example": 300
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Contact",
+      "description": "Contact form submission endpoints"
+    }
+  ]
+}

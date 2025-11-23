@@ -1,0 +1,554 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Sanity Content Schemas",
+  "description": "JSON Schema definitions for Sanity CMS content types used in the freelance portfolio website",
+  "definitions": {
+    "portfolioProject": {
+      "type": "object",
+      "title": "Portfolio Project",
+      "description": "A completed client project showcased in the portfolio",
+      "required": ["title", "slug", "description", "clientType", "projectYear", "thumbnail", "categories", "outcomes", "published"],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "Unique document ID"
+        },
+        "_type": {
+          "type": "string",
+          "const": "portfolioProject"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Project title"
+        },
+        "slug": {
+          "type": "object",
+          "required": ["current"],
+          "properties": {
+            "current": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "description": "URL-friendly identifier"
+            }
+          }
+        },
+        "description": {
+          "type": "string",
+          "minLength": 100,
+          "maxLength": 500,
+          "description": "Brief project description (non-technical)"
+        },
+        "fullDescription": {
+          "type": "array",
+          "description": "Detailed rich text description",
+          "items": {
+            "$ref": "#/definitions/blockContent"
+          }
+        },
+        "clientType": {
+          "type": "string",
+          "enum": ["PME", "Particulier", "Association", "Startup"],
+          "description": "Type of client"
+        },
+        "projectYear": {
+          "type": "integer",
+          "minimum": 2015,
+          "maximum": 2030,
+          "description": "Year project was completed"
+        },
+        "thumbnail": {
+          "$ref": "#/definitions/sanityImage",
+          "description": "Project thumbnail image"
+        },
+        "images": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {
+            "$ref": "#/definitions/sanityImage"
+          },
+          "description": "Additional project images"
+        },
+        "categories": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/definitions/reference"
+          },
+          "description": "References to Category documents"
+        },
+        "technologies": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "string"
+          },
+          "description": "Technologies used (non-technical labels)"
+        },
+        "outcomes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "type": "string"
+          },
+          "description": "Results achieved for client"
+        },
+        "featured": {
+          "type": "boolean",
+          "default": false,
+          "description": "Display in featured section"
+        },
+        "published": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show on live site"
+        },
+        "order": {
+          "type": "integer",
+          "description": "Display order for manual sorting"
+        }
+      }
+    },
+    "category": {
+      "type": "object",
+      "title": "Category",
+      "description": "Service category for filtering portfolio projects",
+      "required": ["name", "slug"],
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "_type": {
+          "type": "string",
+          "const": "category"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Category name"
+        },
+        "slug": {
+          "type": "object",
+          "required": ["current"],
+          "properties": {
+            "current": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            }
+          }
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Category description"
+        },
+        "icon": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Icon identifier (e.g., Lucide icon name)"
+        },
+        "order": {
+          "type": "integer",
+          "description": "Display order"
+        }
+      }
+    },
+    "service": {
+      "type": "object",
+      "title": "Service",
+      "description": "A service offering",
+      "required": ["name", "slug", "shortDescription", "description", "published"],
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "_type": {
+          "type": "string",
+          "const": "service"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Service name"
+        },
+        "slug": {
+          "type": "object",
+          "required": ["current"],
+          "properties": {
+            "current": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            }
+          }
+        },
+        "shortDescription": {
+          "type": "string",
+          "maxLength": 150,
+          "description": "Brief one-liner description"
+        },
+        "description": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/blockContent"
+          },
+          "description": "Detailed service description (rich text)"
+        },
+        "icon": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Icon identifier"
+        },
+        "useCases": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "type": "string"
+          },
+          "description": "Typical use cases or client types"
+        },
+        "pricingGuidance": {
+          "type": "string",
+          "description": "Pricing indication (e.g., 'Sur devis')"
+        },
+        "featured": {
+          "type": "boolean",
+          "default": false
+        },
+        "published": {
+          "type": "boolean",
+          "default": true
+        },
+        "order": {
+          "type": "integer"
+        }
+      }
+    },
+    "aboutContent": {
+      "type": "object",
+      "title": "About Content",
+      "description": "Professional information and branding (singleton)",
+      "required": ["bio", "profilePhoto", "location", "email"],
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "_type": {
+          "type": "string",
+          "const": "aboutContent"
+        },
+        "bio": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/blockContent"
+          },
+          "description": "Professional bio/introduction"
+        },
+        "profilePhoto": {
+          "$ref": "#/definitions/sanityImage",
+          "description": "Professional profile photo"
+        },
+        "location": {
+          "type": "string",
+          "default": "Lyon, France",
+          "description": "Location emphasis"
+        },
+        "skills": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["category", "items"],
+            "properties": {
+              "category": {
+                "type": "string",
+                "description": "Skill category"
+              },
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Skills in category"
+              }
+            }
+          }
+        },
+        "experience": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/blockContent"
+          }
+        },
+        "approach": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/blockContent"
+          }
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Contact email"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number"
+        },
+        "socialLinks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["platform", "url", "display"],
+            "properties": {
+              "platform": {
+                "type": "string",
+                "enum": ["LinkedIn", "GitHub", "Twitter"]
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "display": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "testimonial": {
+      "type": "object",
+      "title": "Testimonial",
+      "description": "Client feedback and social proof",
+      "required": ["clientName", "text", "published"],
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "_type": {
+          "type": "string",
+          "const": "testimonial"
+        },
+        "clientName": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Client name or company name"
+        },
+        "clientRole": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Client role/title"
+        },
+        "text": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Testimonial text"
+        },
+        "projectReference": {
+          "$ref": "#/definitions/reference",
+          "description": "Related portfolio project"
+        },
+        "clientPhoto": {
+          "$ref": "#/definitions/sanityImage",
+          "description": "Client photo or company logo"
+        },
+        "featured": {
+          "type": "boolean",
+          "default": false
+        },
+        "published": {
+          "type": "boolean",
+          "default": false,
+          "description": "Requires explicit approval"
+        },
+        "order": {
+          "type": "integer"
+        }
+      }
+    },
+    "siteSettings": {
+      "type": "object",
+      "title": "Site Settings",
+      "description": "Global site configuration (singleton)",
+      "required": ["siteTitle", "siteDescription"],
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "_type": {
+          "type": "string",
+          "const": "siteSettings"
+        },
+        "siteTitle": {
+          "type": "string",
+          "default": "Julien Butty - Développeur Freelance Lyon"
+        },
+        "siteDescription": {
+          "type": "string",
+          "maxLength": 160,
+          "description": "Meta description for SEO"
+        },
+        "seoKeywords": {
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "type": "string"
+          }
+        },
+        "ogImage": {
+          "$ref": "#/definitions/sanityImage",
+          "description": "Open Graph image for social sharing"
+        },
+        "footerText": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/blockContent"
+          }
+        },
+        "legalNotice": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/blockContent"
+          },
+          "description": "Mentions légales (required for RGPD)"
+        },
+        "privacyPolicy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/blockContent"
+          },
+          "description": "Privacy policy (required for RGPD)"
+        },
+        "copyrightText": {
+          "type": "string",
+          "description": "Copyright text"
+        }
+      }
+    },
+    "sanityImage": {
+      "type": "object",
+      "title": "Sanity Image",
+      "description": "Sanity image asset reference",
+      "required": ["_type", "asset"],
+      "properties": {
+        "_type": {
+          "type": "string",
+          "const": "image"
+        },
+        "asset": {
+          "type": "object",
+          "required": ["_ref", "_type"],
+          "properties": {
+            "_ref": {
+              "type": "string",
+              "description": "Reference to image asset"
+            },
+            "_type": {
+              "type": "string",
+              "const": "reference"
+            }
+          }
+        },
+        "alt": {
+          "type": "string",
+          "description": "Alternative text for accessibility"
+        },
+        "hotspot": {
+          "type": "object",
+          "description": "Image hotspot for cropping"
+        }
+      }
+    },
+    "reference": {
+      "type": "object",
+      "title": "Sanity Reference",
+      "description": "Reference to another document",
+      "required": ["_ref", "_type"],
+      "properties": {
+        "_ref": {
+          "type": "string",
+          "description": "Document ID being referenced"
+        },
+        "_type": {
+          "type": "string",
+          "const": "reference"
+        }
+      }
+    },
+    "blockContent": {
+      "type": "object",
+      "title": "Block Content",
+      "description": "Portable Text block",
+      "required": ["_type"],
+      "properties": {
+        "_type": {
+          "type": "string",
+          "const": "block"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["_type", "text"],
+            "properties": {
+              "_type": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "marks": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "markDefs": {
+          "type": "array",
+          "description": "Mark definitions (links, etc.)"
+        },
+        "style": {
+          "type": "string",
+          "description": "Block style (normal, h1, h2, etc.)"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "portfolioProjects": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/portfolioProject"
+      }
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/category"
+      }
+    },
+    "services": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/service"
+      }
+    },
+    "aboutContent": {
+      "$ref": "#/definitions/aboutContent"
+    },
+    "testimonials": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/testimonial"
+      }
+    },
+    "siteSettings": {
+      "$ref": "#/definitions/siteSettings"
+    }
+  }
+}

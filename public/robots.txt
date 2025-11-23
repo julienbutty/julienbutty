@@ -1,0 +1,15 @@
+# robots.txt for julienbutty.fr
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://julienbutty.fr/sitemap.xml
+
+# Crawl delay (optional - prevents overloading)
+Crawl-delay: 1
+
+# Block specific paths (if needed in the future)
+# Disallow: /admin/
+# Disallow: /private/
