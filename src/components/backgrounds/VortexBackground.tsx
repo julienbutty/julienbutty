@@ -7,7 +7,7 @@
 'use client'
 
 import { cn } from '../../lib/utils'
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { createNoise3D } from 'simplex-noise'
 import { motion } from 'framer-motion'
 
@@ -52,9 +52,7 @@ export const Vortex = (props: VortexProps) => {
   let particleProps = new Float32Array(particlePropsLength)
   let center: [number, number] = [0, 0]
 
-  const HALF_PI: number = 0.5 * Math.PI
   const TAU: number = 2 * Math.PI
-  const TO_RAD: number = Math.PI / 180
 
   const rand = (n: number): number => n * Math.random()
   const randRange = (n: number): number => n - rand(2 * n)
@@ -72,7 +70,7 @@ export const Vortex = (props: VortexProps) => {
     if (canvas && container) {
       const ctx = canvas.getContext('2d')
       if (ctx) {
-        resize(canvas, ctx)
+        resize(canvas)
         initParticles()
         draw(canvas, ctx)
       }
@@ -135,18 +133,18 @@ export const Vortex = (props: VortexProps) => {
 
     let n, x, y, vx, vy, life, ttl, speed, x2, y2, radius, hue
 
-    x = particleProps[i]
-    y = particleProps[i2]
+    x = particleProps[i]!
+    y = particleProps[i2]!
     n = noise3D(x * xOff, y * yOff, tick * zOff) * noiseSteps * TAU
-    vx = lerp(particleProps[i3], Math.cos(n), 0.5)
-    vy = lerp(particleProps[i4], Math.sin(n), 0.5)
-    life = particleProps[i5]
-    ttl = particleProps[i6]
-    speed = particleProps[i7]
+    vx = lerp(particleProps[i3]!, Math.cos(n), 0.5)
+    vy = lerp(particleProps[i4]!, Math.sin(n), 0.5)
+    life = particleProps[i5]!
+    ttl = particleProps[i6]!
+    speed = particleProps[i7]!
     x2 = x + vx * speed
     y2 = y + vy * speed
-    radius = particleProps[i8]
-    hue = particleProps[i9]
+    radius = particleProps[i8]!
+    hue = particleProps[i9]!
 
     drawParticle(x, y, x2, y2, life, ttl, radius, hue, ctx)
 
@@ -186,7 +184,7 @@ export const Vortex = (props: VortexProps) => {
     return x > canvas.width || x < 0 || y > canvas.height || y < 0
   }
 
-  const resize = (canvas: HTMLCanvasElement, ctx?: CanvasRenderingContext2D) => {
+  const resize = (canvas: HTMLCanvasElement) => {
     const { innerWidth, innerHeight } = window
     canvas.width = innerWidth
     canvas.height = innerHeight
@@ -218,9 +216,8 @@ export const Vortex = (props: VortexProps) => {
     setup()
     window.addEventListener('resize', () => {
       const canvas = canvasRef.current
-      const ctx = canvas?.getContext('2d')
-      if (canvas && ctx) {
-        resize(canvas, ctx)
+      if (canvas) {
+        resize(canvas)
       }
     })
   }, [])

@@ -34,7 +34,7 @@ function AppContent() {
       '/faq': 'Questions Fréquentes - Julien Butty',
       '/mentions-legales': 'Mentions Légales - Julien Butty',
     }
-    document.title = titles[location.pathname] || titles['/']
+    document.title = titles[location.pathname] ?? titles['/']!
   }, [location])
 
   return (

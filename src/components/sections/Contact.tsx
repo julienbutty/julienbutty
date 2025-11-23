@@ -78,7 +78,7 @@ export function Contact({ services = defaultServiceOptions }: ContactProps) {
         const sanitizedValues = {
           name: sanitizeInput(values.name),
           email: sanitizeInput(values.email),
-          phone: sanitizeInput(values.phone),
+          phone: values.phone ? sanitizeInput(values.phone) : '',
           serviceInterest: values.serviceInterest,
           message: sanitizeInput(values.message),
           rgpdConsent: values.rgpdConsent,
