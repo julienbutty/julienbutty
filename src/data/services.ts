@@ -19,30 +19,31 @@ export interface ServiceData {
 export const services: ServiceData[] = [
   {
     id: '1',
-    name: 'Site WordPress professionnel',
-    slug: 'site-wordpress-professionnel',
-    shortDescription: 'Un site web clé en main que vous pourrez gérer vous-même, sans compétences techniques',
-    description: `Vous avez besoin d'une présence en ligne professionnelle sans vous compliquer la vie ?
+    name: 'Création de sites web',
+    slug: 'creation-sites-web',
+    shortDescription:
+      'Sites vitrine, e-commerce et applications web sur-mesure pour votre activité',
+    description: `Vous avez besoin d'une présence en ligne professionnelle ou d'une plateforme web performante ?
 
-Je crée votre site WordPress sur mesure, adapté à votre activité et votre image. Vous pourrez facilement mettre à jour vos contenus, ajouter des photos, et gérer vos pages sans m'appeler à chaque fois.
+Je crée des sites web modernes et optimisés, adaptés à vos besoins : site vitrine, e-commerce, application métier ou plateforme personnalisée. WordPress pour la simplicité, ou développement sur-mesure pour des besoins spécifiques.
 
 **Idéal pour :**
-- Artisans et commerces locaux
-- Professions libérales (médecins, avocats, architectes...)
-- Petites entreprises et associations
-- Freelances qui veulent gagner en visibilité
+- Artisans et commerces locaux qui veulent être visible en ligne
+- E-commerce et boutiques en ligne performantes
+- Startups qui lancent leur service digital
+- PME avec des besoins métier spécifiques
 
 **Ce que vous obtenez :**
 - Design moderne et responsive (mobile, tablette, ordinateur)
-- Formation pour gérer votre site en autonomie
-- Optimisé pour Google (référencement local Lyon)
-- Formulaire de contact fonctionnel`,
-    icon: 'wordpress',
+- Site rapide et optimisé pour Google (SEO)
+- Formation pour gérer votre contenu en autonomie
+- Code propre et maintenable pour l'avenir`,
+    icon: 'code',
     useCases: [
-      'Artisans et commerces locaux',
-      'Professions libérales',
-      'Petites entreprises et associations',
-      'Freelances',
+      'Sites vitrine professionnels',
+      'Boutiques e-commerce',
+      'Applications web métier',
+      'Plateformes sur-mesure',
     ],
     pricingGuidance: 'Sur devis',
     featured: true,
@@ -50,30 +51,31 @@ Je crée votre site WordPress sur mesure, adapté à votre activité et votre im
   },
   {
     id: '2',
-    name: 'Application web sur mesure',
-    slug: 'application-web-sur-mesure',
-    shortDescription: 'Des outils digitaux créés spécifiquement pour votre métier et vos processus',
-    description: `Votre activité a des besoins spécifiques qu'aucun logiciel du marché ne couvre vraiment ?
+    name: 'Intelligence Artificielle',
+    slug: 'intelligence-artificielle',
+    shortDescription:
+      'Gagnez du temps en automatisant vos tâches répétitives avec l\'Intelligence Artificielle',
+    description: `L'Intelligence Artificielle peut vraiment simplifier votre quotidien professionnel.
 
-Je développe des applications web personnalisées qui s'adaptent à VOTRE façon de travailler. Gestion interne, plateforme client, outil métier... je transforme vos idées en solutions concrètes et utilisables.
+Je vous aide à intégrer l'IA dans votre activité pour automatiser les tâches répétitives et gagner du temps. Pas besoin d'être expert technique - je traduis vos besoins en solutions concrètes et accessibles.
 
-**Parfait pour :**
-- PME avec des process métier spécifiques
-- Startups qui lancent un nouveau service
-- Entreprises qui veulent digitaliser leur activité
-- Plateformes de mise en relation ou services en ligne
+**Ce que je peux faire pour vous :**
+- Créer un chatbot qui répond à vos clients 24h/24
+- Analyser automatiquement vos documents (devis, factures, commandes)
+- Développer un assistant virtuel adapté à votre métier
+- Automatiser vos processus pour vous concentrer sur l'essentiel
 
-**Mes points forts :**
-- Analyse de vos besoins et conseil en amont
-- Développement moderne et performant (React, TypeScript)
-- Interface intuitive pour vos équipes
-- Code propre et maintenable pour l'avenir`,
-    icon: 'code',
+**Mon approche :**
+- On discute de vos besoins réels, sans jargon technique
+- Je vous montre ce qui est possible avec votre budget
+- Solutions pratiques qui fonctionnent vraiment
+- Confidentialité et sécurité garanties`,
+    icon: 'ai',
     useCases: [
-      'PME avec des process métier spécifiques',
-      'Startups innovantes',
-      'Digitalisation d\'activité',
-      'Plateformes de mise en relation',
+      'Chatbots intelligents',
+      'Analyse de documents par IA',
+      'Assistants métier personnalisés',
+      'Automatisation de processus',
     ],
     pricingGuidance: 'Sur devis',
     featured: true,
@@ -81,35 +83,36 @@ Je développe des applications web personnalisées qui s'adaptent à VOTRE faço
   },
   {
     id: '3',
-    name: 'Ajout de fonctionnalités',
-    slug: 'ajout-de-fonctionnalites',
-    shortDescription: 'J\'améliore et fais évoluer vos sites et applications existantes',
-    description: `Vous avez déjà un site ou une application, mais il manque une fonctionnalité importante ? Ou quelque chose ne fonctionne pas comme vous le souhaitez ?
+    name: 'Maintenance et évolution',
+    slug: 'maintenance-evolution',
+    shortDescription: 'Suivi, sécurité et amélioration continue de vos sites et applications',
+    description: `Votre site ou application est en ligne, mais il faut le maintenir à jour, sécurisé et performant.
 
-J'interviens sur vos projets existants pour :
-- Ajouter de nouvelles fonctionnalités
-- Corriger des bugs ou problèmes techniques
-- Améliorer les performances et l'expérience utilisateur
-- Moderniser une interface vieillissante
-- Connecter des services externes (API, paiement, CRM...)
+J'assure le suivi technique de vos projets web : mises à jour de sécurité, corrections de bugs, ajout de nouvelles fonctionnalités et optimisations. Que ce soit un projet que j'ai créé ou repris d'un autre développeur.
+
+**Services de maintenance :**
+- Mises à jour de sécurité et corrections de bugs
+- Monitoring et optimisation des performances
+- Ajout de nouvelles fonctionnalités
+- Sauvegardes automatiques et sécurité renforcée
+- Support technique réactif
 
 **Idéal pour :**
-- Sites WordPress à enrichir
-- Applications à faire évoluer
+- Sites WordPress qui ont besoin de suivi régulier
+- Applications métier à faire évoluer dans le temps
 - Projets lancés par d'autres développeurs
-- Besoin ponctuel sans refaire tout le site
+- Entreprises qui veulent un partenaire technique de confiance
 
 **Mon approche :**
-- Audit gratuit pour comprendre l'existant
-- Interventions ciblées et efficaces
-- Respect du code et de l'architecture en place
-- Conseils pour prioriser ce qui a le plus d'impact`,
+- Interventions rapides et efficaces
+- Conseils proactifs pour améliorer votre projet
+- Transparence totale sur les actions réalisées`,
     icon: 'settings',
     useCases: [
-      'Sites WordPress à enrichir',
-      'Applications à faire évoluer',
-      'Reprise de projets existants',
-      'Interventions ponctuelles',
+      'Maintenance WordPress',
+      'Support technique réactif',
+      "Évolution d'applications",
+      'Optimisation continue',
     ],
     pricingGuidance: 'Sur devis',
     featured: true,

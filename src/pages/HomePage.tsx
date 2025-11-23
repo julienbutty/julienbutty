@@ -21,8 +21,8 @@ export function HomePage() {
   return (
     <>
       <SEO
-        title="Julien Butty - Développeur Freelance à Lyon | React, Node.js, TypeScript"
-        description="Développeur web freelance basé à Lyon. Création de sites web et applications sur-mesure avec React, Node.js et TypeScript. Disponible dans toute la Métropole de Lyon et à distance."
+        title="Julien Butty - Développeur Freelance à Lyon | React, Node.js, IA"
+        description="Développeur web et IA freelance basé à Lyon. Création de sites web, applications sur-mesure et solutions d'Intelligence Artificielle (chatbots, automatisation). Disponible dans toute la Métropole de Lyon et à distance."
         canonical="https://julienbutty.fr/"
         structuredData={homeStructuredData}
       />

@@ -16,9 +16,9 @@ export interface SEOProps {
   structuredData?: object
 }
 
-const defaultTitle = 'Julien Butty - Développeur Freelance à Lyon | React, Node.js, TypeScript'
+const defaultTitle = 'Julien Butty - Développeur Freelance à Lyon | React, Node.js, IA'
 const defaultDescription =
-  'Développeur web freelance basé à Lyon. Création de sites web et applications sur-mesure avec React, Node.js et TypeScript. Disponible dans toute la Métropole de Lyon et à distance.'
+  'Développeur web et IA freelance basé à Lyon. Création de sites web, applications sur-mesure et solutions d\'Intelligence Artificielle (chatbots, automatisation). Disponible dans toute la Métropole de Lyon et à distance.'
 const defaultOgImage = '/og-image.png' // You'll need to add this image
 const siteUrl = 'https://julienbutty.fr' // Update with your actual domain
 

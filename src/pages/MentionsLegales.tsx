@@ -33,7 +33,7 @@ export function MentionsLegales() {
                 <li><strong>Nom :</strong> Julien Butty</li>
                 <li><strong>Statut :</strong> Auto-entrepreneur</li>
                 <li><strong>Adresse :</strong> Lozanne, 69380, France</li>
-                <li><strong>Email :</strong> julienbutty@gmail.com</li>
+                <li><strong>Email :</strong> contact@julienbutty.fr</li>
                 <li><strong>SIRET :</strong> 923 917 025 00010</li>
                 <li><strong>N° TVA :</strong> FR46923917025</li>
               </ul>
@@ -109,8 +109,8 @@ export function MentionsLegales() {
               <h2 className="text-2xl font-bold mb-4 text-gray-50">8. Contact</h2>
               <p className="text-gray-300 leading-relaxed">
                 Pour toute question concernant les mentions légales, vous pouvez me contacter à l'adresse suivante :
-                <a href="mailto:julienbutty@gmail.com" className="text-primary-400 hover:text-primary-300 ml-1">
-                  julienbutty@gmail.com
+                <a href="mailto:contact@julienbutty.fr" className="text-primary-400 hover:text-primary-300 ml-1">
+                  contact@julienbutty.fr
                 </a>
               </p>
             </section>

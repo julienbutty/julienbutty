@@ -29,7 +29,7 @@ export interface HeroProps {
 export function Hero({
   title = 'Julien Butty',
   subtitle = 'Développeur Freelance à Lyon',
-  description = 'Je crée des sites web modernes et performants pour les PME et particuliers. De WordPress aux applications sur mesure, je transforme vos idées en solutions digitales.',
+  description = 'Je crée des sites web modernes et des solutions d\'Intelligence Artificielle pour les PME et particuliers. De la création de sites aux chatbots IA, je transforme vos idées en solutions digitales innovantes.',
   ctaSecondary = { text: 'Me contacter', href: '#contact' },
 }: HeroProps) {
   const handleScroll = (href: string) => {

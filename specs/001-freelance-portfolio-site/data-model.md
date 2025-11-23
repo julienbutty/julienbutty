@@ -270,7 +270,7 @@ Represents Julien's professional information and branding (singleton document).
       /* rich text blocks */
     }
   ],
-  "email": "julienbutty@gmail.com",
+  "email": "contact@julienbutty.fr",
   "phone": "+33 6 XX XX XX XX",
   "socialLinks": [
     {

@@ -324,10 +324,10 @@ export function Contact({ services = defaultServiceOptions }: ContactProps) {
           <motion.div variants={staggerItem} className="mt-12 text-center text-gray-400">
             <p className="mb-2">Ou contactez-moi directement :</p>
             <a
-              href="mailto:julienbutty@gmail.com"
+              href="mailto:contact@julienbutty.fr"
               className="text-primary-400 hover:text-primary-300 font-medium"
             >
-              julienbutty@gmail.com
+              contact@julienbutty.fr
             </a>
           </motion.div>
         </div>

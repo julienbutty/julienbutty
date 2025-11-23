@@ -17,10 +17,10 @@ export const localBusinessSchema = {
   logo: `${siteUrl}/og-image.png`,
   image: `${siteUrl}/og-image.png`,
   description:
-    'Développeur web freelance spécialisé en React, Node.js et TypeScript. Création de sites web et applications sur-mesure à Lyon et partout en France.',
+    'Développeur web et IA freelance spécialisé en React, Node.js, TypeScript et Intelligence Artificielle. Création de sites web, applications sur-mesure et solutions IA à Lyon et partout en France.',
   priceRange: 'Sur devis',
   telephone: '+33-X-XX-XX-XX-XX', // Add your phone number
-  email: 'julienbutty@gmail.com',
+  email: 'contact@julienbutty.fr',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Lozanne', // Keep vague for privacy
@@ -64,42 +64,34 @@ export const localBusinessSchema = {
     '@type': 'Person',
     name: 'Julien Butty',
     jobTitle: 'Développeur Web Freelance',
-    email: 'julienbutty@gmail.com',
+    email: 'contact@julienbutty.fr',
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Services de développement web',
+    name: 'Services de développement web et IA',
     itemListElement: [
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Site WordPress sur-mesure',
-          description: 'Création de sites WordPress personnalisés et optimisés',
+          name: 'Création de sites web',
+          description: 'Sites vitrine, e-commerce et applications web sur-mesure. WordPress ou développement personnalisé.',
         },
       },
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Développement sur mesure',
-          description: 'Applications web et sites React, Node.js, TypeScript',
+          name: 'Intelligence Artificielle',
+          description: 'Automatisation de tâches répétitives avec l\'IA : chatbots 24/7, analyse automatique de documents, assistants métier personnalisés. Solutions accessibles et pratiques.',
         },
       },
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'E-commerce',
-          description: 'Boutiques en ligne performantes et sécurisées',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Refonte de site',
-          description: 'Modernisation et optimisation de sites existants',
+          name: 'Maintenance et évolution',
+          description: 'Suivi technique, mises à jour de sécurité, optimisation et ajout de fonctionnalités.',
         },
       },
     ],
@@ -118,10 +110,10 @@ export const personSchema = {
   familyName: 'Butty',
   jobTitle: 'Développeur Web Freelance',
   description:
-    "Développeur fullstack avec plus de 6 ans d'expérience. Spécialisé en React, Node.js et TypeScript. Reconverti dans le développement web par passion.",
+    "Développeur fullstack avec plus de 6 ans d'expérience. Spécialisé en React, Node.js, TypeScript et Intelligence Artificielle. Expérience sur chatbot médical et analyse de documents par IA. Reconverti dans le développement web par passion.",
   url: siteUrl,
   image: `${siteUrl}/og-image.png`,
-  email: 'julienbutty@gmail.com',
+  email: 'contact@julienbutty.fr',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Lyon',
@@ -135,7 +127,11 @@ export const personSchema = {
     'TypeScript',
     'JavaScript',
     'WordPress',
-    'E-commerce',
+    'Intelligence Artificielle',
+    'ChatGPT',
+    'Claude AI',
+    'Chatbots',
+    'Machine Learning',
     'Web Development',
     'Frontend Development',
     'Backend Development',

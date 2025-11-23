@@ -77,7 +77,7 @@ export function Footer({
                   </svg>
                 </a>
                 <a
-                  href="mailto:julienbutty@gmail.com"
+                  href="mailto:contact@julienbutty.fr"
                   className="text-gray-400 hover:text-primary-400 transition-colors"
                   aria-label="Email"
                 >
