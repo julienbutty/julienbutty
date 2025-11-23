@@ -13,9 +13,11 @@ import { Textarea } from '../ui/Textarea'
 import { Select } from '../ui/Select'
 import { Checkbox } from '../ui/Checkbox'
 import { Button } from '../ui/Button'
+import { Toast } from '../ui/Toast'
 import { useForm } from '../../hooks/useForm'
 import { validateContactForm, sanitizeInput, isSuspiciousSubmission } from '../../lib/validators'
 import { staggerContainer, staggerItem } from '../../lib/animations'
+import { scrollToElement } from '../../lib/utils'
 import type { ContactFormData } from '../../types'
 
 export interface ContactProps {
@@ -116,14 +118,31 @@ export function Contact({ services = defaultServiceOptions }: ContactProps) {
           setSubmitStatus('success')
           form.resetForm()
 
+          // Scroll to top (hero section)
+          scrollToElement('hero', 80)
+
           // Reset success message after 5 seconds
           setTimeout(() => setSubmitStatus('idle'), 5000)
         } else {
           setSubmitStatus('error')
+          // Scroll to error message near submit button
+          setTimeout(() => {
+            const submitButton = document.querySelector('button[type="submit"]')
+            if (submitButton) {
+              submitButton.scrollIntoView({ behavior: 'smooth', block: 'center' })
+            }
+          }, 100)
         }
       } catch (error) {
         console.error('Form submission error:', error)
         setSubmitStatus('error')
+        // Scroll to error message near submit button
+        setTimeout(() => {
+          const submitButton = document.querySelector('button[type="submit"]')
+          if (submitButton) {
+            submitButton.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          }
+        }, 100)
       }
     },
   })
@@ -162,38 +181,14 @@ export function Contact({ services = defaultServiceOptions }: ContactProps) {
         </div>
 
         <div className="max-w-2xl mx-auto">
-          {/* Success message */}
-          {submitStatus === 'success' && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mb-8 p-4 bg-green-500/10 border border-green-500/20 rounded-lg text-green-400"
-            >
-              ✓ Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.
-            </motion.div>
-          )}
-
-          {/* Error message */}
-          {submitStatus === 'error' && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400"
-            >
-              ✗ Une erreur s'est produite. Veuillez réessayer ou me contacter directement.
-            </motion.div>
-          )}
-
-          {/* Spam detection message */}
-          {submitStatus === 'spam' && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mb-8 p-4 bg-orange-500/10 border border-orange-500/20 rounded-lg text-orange-400"
-            >
-              ⚠ Votre message semble contenir du contenu suspect. Veuillez vérifier votre message ou me contacter directement par email.
-            </motion.div>
-          )}
+          {/* Toast notification for success */}
+          <Toast
+            message="Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais."
+            type="success"
+            isVisible={submitStatus === 'success'}
+            onClose={() => setSubmitStatus('idle')}
+            duration={5000}
+          />
 
           {/* Contact form */}
           <motion.form
@@ -303,6 +298,39 @@ export function Contact({ services = defaultServiceOptions }: ContactProps) {
                 demande.
               </p>
             </motion.div>
+
+            {/* Error messages near submit button */}
+            {submitStatus === 'error' && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 flex items-start gap-3"
+              >
+                <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                </svg>
+                <div>
+                  <p className="font-semibold">Une erreur s'est produite</p>
+                  <p className="text-sm mt-1">Veuillez réessayer ou me contacter directement à <a href="mailto:contact@julienbutty.fr" className="underline hover:text-red-300">contact@julienbutty.fr</a></p>
+                </div>
+              </motion.div>
+            )}
+
+            {submitStatus === 'spam' && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="p-4 bg-orange-500/10 border border-orange-500/20 rounded-lg text-orange-400 flex items-start gap-3"
+              >
+                <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                </svg>
+                <div>
+                  <p className="font-semibold">Message suspect détecté</p>
+                  <p className="text-sm mt-1">Votre message semble contenir du contenu suspect. Veuillez vérifier ou me contacter directement par email.</p>
+                </div>
+              </motion.div>
+            )}
 
             {/* Submit button */}
             <motion.div variants={staggerItem}>
