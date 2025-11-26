@@ -3,15 +3,17 @@
  * Root component with routing
  */
 
-import { useEffect } from 'react'
+import { useEffect, lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { pageTransition } from './lib/animations'
 import { Footer } from './components/sections'
 import { HomePage } from './pages/HomePage'
-import { AboutPage } from './pages/AboutPage'
-import { FAQ } from './pages/FAQ'
-import { MentionsLegales } from './pages/MentionsLegales'
+
+// Lazy load secondary pages for better initial bundle size
+const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })))
+const FAQ = lazy(() => import('./pages/FAQ').then(m => ({ default: m.FAQ })))
+const MentionsLegales = lazy(() => import('./pages/MentionsLegales').then(m => ({ default: m.MentionsLegales })))
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -58,12 +60,14 @@ function AppContent() {
           variants={pageTransition}
           className="min-h-screen"
         >
-          <Routes location={location}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/a-propos" element={<AboutPage />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/mentions-legales" element={<MentionsLegales />} />
-          </Routes>
+          <Suspense fallback={<div className="min-h-screen bg-gray-900" />}>
+            <Routes location={location}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/a-propos" element={<AboutPage />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/mentions-legales" element={<MentionsLegales />} />
+            </Routes>
+          </Suspense>
 
           <Footer />
         </motion.div>

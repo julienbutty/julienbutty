@@ -94,7 +94,7 @@ export function Footer({
         </div>
 
         {/* Copyright */}
-        <div className="pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+        <div className="pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
           <p>
             {copyrightText.replace('2025', String(currentYear))}
           </p>
