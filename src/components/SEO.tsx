@@ -20,7 +20,7 @@ const defaultTitle = 'Julien Butty - Développeur Freelance à Lyon | React, Nod
 const defaultDescription =
   'Développeur web et IA freelance basé à Lyon. Création de sites web, applications sur-mesure et solutions d\'Intelligence Artificielle (chatbots, automatisation). Disponible dans toute la Métropole de Lyon et à distance.'
 const defaultOgImage = '/og-image.png' // You'll need to add this image
-const siteUrl = 'https://julienbutty.fr' // Update with your actual domain
+const siteUrl = 'https://www.julienbutty.fr'
 
 export function SEO({
   title,

@@ -5,7 +5,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://julienbutty.fr/sitemap.xml
+Sitemap: https://www.julienbutty.fr/sitemap.xml
 
 # Crawl delay (optional - prevents overloading)
 Crawl-delay: 1
